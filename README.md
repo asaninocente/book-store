@@ -11,3 +11,7 @@ CD into the new folder
 Start a new app inside the project app
 
     python manage.py startapp book_outlet
+
+Start database migrations
+
+    python manage.py makemigrations
