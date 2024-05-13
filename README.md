@@ -119,3 +119,38 @@ Using _db_index=True_ increases performance, but you shouldn't turn all your fie
 Create a super user to login in /admin
 
     python manage.py createsuperuser
+
+Working with Relations in the shell:
+
+    from book_outlet.models import Book, Author
+
+> jkrowling = Author(first_name='J.K.', last_name='Rowling')  
+>
+> jkrowling.save()
+>
+> hp1 = Book(title='Harry Potter 1', rating=5, is_bestselling =True, author=jkrowling)
+>
+> hp1.save()
+>
+> harrypotter = Book.objects.get(title='Harry Potter 1')
+>
+> harrypotter
+
+_Out[10]: <Book: Harry Potter 1 (5)>_
+> harrypotter.author
+
+_Out[11]: <Author: Author object (1)>_
+
+Cross Model Queries:
+> books_by_rowling = Book.objects.filter(author__last_name__contains='wling')
+
+> jkr = Author.objects.get(first_name='J.K.')
+>
+> jkr.book_set.all()
+
+Although Django automatically creates this property on the Author object, you cant set in _models.py_ a custom function to call the inverse of a model relation (through the _related_name_ parameter in the field related between models)
+> jkr.books.all()
+>
+>jkr.books.get(title='Harry Potter 1')
+>
+> jkr.books.filter(rating__gt=3)
