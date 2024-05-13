@@ -154,3 +154,47 @@ Although Django automatically creates this property on the Author object, you ca
 >jkr.books.get(title='Harry Potter 1')
 >
 > jkr.books.filter(rating__gt=3)
+
+Add data to one-to-one relation:
+> from book_outlet.models import Book, Author, Address        
+>
+> addr1 = Address(street='Some Street', postal_code='12345', city='London')
+>
+> addr2 = Address(street='Another Street', postal_code='67890', city='New York')
+>
+> addr1.save()
+>
+> addr2.save()
+>
+> jkr = Author.objects.get(first_name='J.K.')
+>
+> jkr.address = addr1
+>
+> jkr.save()
+>
+> Address.objects.all()[0].author.first_name
+
+Add data to many-to-many relation:
+> from book_outlet.models import Country, Book
+>
+> hp1 = Book.objects.all()[0]
+>
+> hp1.published_countries.all()
+>
+> germany = Country(name='Germany', code='DE')
+>
+> germany.save()
+>
+> mys = Book.objects.all()[1]
+>
+> mys.published_countries.add(germany)
+>
+> mys.published_countries.filter(code='DE')
+
+The _add()_ method only exists when you're dealing with many-to-many relations.
+
+Inverse:
+> ger = Country.objects.all()[0]
+>
+> ger.book_set.all()
+
