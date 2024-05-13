@@ -113,3 +113,5 @@ However, if you store it in a variable and print the result as many times as you
 Instead of using _{% url 'book-detail' book.id %}_ in the template, you can use _{{ book.get_absolute_url }}_ but need to define the get_absolute_url() function in models.py
 
 If you implement a slug after you created DB records, just _Book.objects.get(title="...").save()_ and the slug will be created.
+
+Using _db_index=True_ increases performance, but you shouldn't turn all your fields into indexes. Really just the ones which you use a lot for querying.
