@@ -1,4 +1,6 @@
 # book-store
+- Install the "Django" VSCode extension (by Baptiste Dasthenay)
+- Ctrl + Shift + P --> "workspace settings" --> add <"python.languageServer": "Pylance">
 
 Start the Django project
 
