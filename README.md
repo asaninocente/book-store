@@ -115,3 +115,7 @@ Instead of using _{% url 'book-detail' book.id %}_ in the template, you can use 
 If you implement a slug after you created DB records, just _Book.objects.get(title="...").save()_ and the slug will be created.
 
 Using _db_index=True_ increases performance, but you shouldn't turn all your fields into indexes. Really just the ones which you use a lot for querying.
+
+Create a super user to login in /admin
+
+    python manage.py createsuperuser
